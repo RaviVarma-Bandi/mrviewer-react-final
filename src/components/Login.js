@@ -16,9 +16,9 @@ function Login() {
     validationSchema: Yup.object({
       email: Yup.string()
         .email('Invalid email address')
-        .required('Email is Required'),
+        .required('* required field'),
       password: Yup.string()
-        .required('Password is Required'),
+        .required('* required field'),
     })
   })
 
@@ -30,26 +30,24 @@ function Login() {
       password: formik.values.password
     }
 
-    console.log(data)
-
     try {
       const res = await axiosConf.login(data);
       localStorage.setItem('user', JSON.stringify(res.data.user));
       localStorage.setItem('jwtToken', JSON.stringify(res.data.jwtToken));
       console.log(localStorage)
-      if(res.data.user === ""){
+      if (res.data.user === "") {
         toast.error('INVALID CREDENTIALS');
-      }else{
-        if(res.data.user.role === "USER") {
+      } else {
+        if (res.data.user.role === "USER") {
           navigate("/user/movies");
         }
-        if(res.data.user.role === "ADMIN") {
+        if (res.data.user.role === "ADMIN") {
           navigate("/admin");
         }
       }
-    } 
+    }
     catch (error) {
-       alert("Invalid email or password")
+      toast.warn("Provide valid credentials")
     }
   }
 
@@ -62,32 +60,38 @@ function Login() {
               <h2 className="fw-bold mb-2 text-uppercase">MRVIEWER</h2>
               <p className="text-white-50 mb-5">Please enter your login and password!</p>
               <form onSubmit={handleSubmit} className='d-flex flex-column align-items-center mx-auto w-100'>
-                <input class="rounded"
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder='Email Address'
-                  {...formik.getFieldProps('email')}
-                />
-                {
-                  formik.touched.email && formik.errors.email ?
-                    (<div><small class="text-danger">{formik.errors.email}</small></div>) : null
-                }
+                <div>
 
-                <input class="mt-3 rounded"
-                  id="password"
-                  name="password"
-                  type="password"
-                  placeholder='password'
-                  {...formik.getFieldProps('password')}
-                />
-                {
-                  formik.touched.password && formik.errors.password ?
-                    (<div><small class="text-danger">{formik.errors.password}</small></div>) : null
-                }
+                  <input class="rounded"
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder='Email Address'
+                    {...formik.getFieldProps('email')}
+                  />
+                  {
+                    formik.touched.email && formik.errors.email ?
+                      (<div><small class="text-danger">{formik.errors.email}</small></div>) : null
+                  }
+                </div>
+
+                <div>
+
+                  <input class="mt-3 rounded"
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder='password'
+                    {...formik.getFieldProps('password')}
+                  />
+                  {
+                    formik.touched.password && formik.errors.password ?
+                      (<div><small class="text-danger">{formik.errors.password}</small></div>) : null
+                  }
+                </div>
                 <button type="submit" class="btn btn-success btn-md mx-3 mt-3">Submit</button>
 
-                <a href="www.google.com" class="text-left my-1">
+                <a href="/user/resetpassword" class="text-left my-1">
                   forgot password?
                 </a>
                 <p class="my-1">Don't have an account? <strong><a class="text-muted" href='/register'>Sign Up</a></strong></p>

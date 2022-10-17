@@ -21,6 +21,23 @@ export const signup = async (val) => {
     return res;
 }
 
+export const resetPassword = async (email) => {
+    const res = await axios({
+        method:'get',
+        url : `${baseUrl}/user/resetpassword/${email}`,
+    });
+    return res;
+}
+
+export const passowordResets = async (token, passwords) => {
+    const res = await axiosObject({
+        method : 'post',
+        url : `${baseUrl}/user/resetpassword?token=${token}`,
+        data : passwords,
+    });
+    return res;
+}
+
 export const logout = () => {
     localStorage.removeItem('jwtToken');
 }
@@ -55,6 +72,23 @@ export const editUser = async (user, id) => {
         url : `${baseUrl}/admin/edit/${id}`,
         data : user,
     })
+    return res;
+}
+
+export const likeMovie = async (userId, movieId, like) => {
+    const res = await axiosObject({
+        method : 'post',
+        url : `${baseUrl}/user/like/${userId}/${movieId}`,
+        data : like,
+    });
+    return res;
+}
+
+export const dislikeMovie = async (likeId) => {
+    const res = await axiosObject({
+        method : 'delete',
+        url : `${baseUrl}/like/${likeId}`,
+    });
     return res;
 }
 

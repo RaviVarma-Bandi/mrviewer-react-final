@@ -12,6 +12,8 @@ import GetUser from "./components/user/GetUser";
 import MoviesList from "./components/admin/MoviesList";
 import AddMovie from "./components/admin/AddMovie";
 import EditMovie from "./components/admin/EditMovie";
+import ResetPassword from "./components/user/ResetPassword";
+import ResetPasswordForm from "./components/user/ResetPasswordForm";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/user/resetpassword" element={<ResetPassword />}></Route>
+        <Route path="/user/setnewpassword" element={<ResetPasswordForm />}></Route>
 
         <Route path="/user" element={<UserLayout />}>
           <Route path="/user/movies" element={<Movies />}></Route>

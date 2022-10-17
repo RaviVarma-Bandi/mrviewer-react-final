@@ -1,17 +1,15 @@
-import { Card, CardContent, Grid, TextField } from '@material-ui/core'
+import { Card, CardContent, Grid} from '@material-ui/core'
 import { useFormik } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import * as axiosConf from "../../api/axiosConf";
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 function EditUser() {
     const phoneRegExp = /^\d{10}$/i;
-    const emailRegExp =
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
+    const emailRegExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
     const [user, setUser] = useState([]);
     const param = useParams();
     const id = user.id;

@@ -9,11 +9,9 @@ import * as axiosConf from "../api/axiosConf";
 
 
 function Register() {
-    const signUpURL = "http://localhost:8080/user/register";
     const userNameRegExp = /^[a-z0-9]+$/i;
     const phoneRegExp = /^\d{10}$/i;
-    const emailRegExp =
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
+    const emailRegExp =/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
 
     const formik = useFormik({
         initialValues: {
@@ -45,7 +43,8 @@ function Register() {
                 .matches(phoneRegExp, "Number format is invalid"),
 
             password: Yup.string()
-                .required("* required field"),
+                .required("* required field")
+                .min(8, "Password must be 8 characters"),
 
             confirmPassword: Yup.string()
                 .required("* required field")
